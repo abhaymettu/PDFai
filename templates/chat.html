@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#chat-form').on('submit', function(e) {
+                e.preventDefault();
+                var message = $('#message-input').val();
+                $('#message-input').val('');
+                if (message.trim() !== '') {
+                    $('#chat-history').append('<div class="user-message">User: ' + message + '</div>');
+                    $.post('/chat', { message: message }, function(data) {
+                        $('#chat-history').append('<div class="bot-message">Chatbot: ' + data.response + '</div>');
+                    });
+                }
+            });
+        });
+    </script>
+    <style>
+        .user-message {
+            color: blue;
+        }
+
+        .bot-message {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chatbot</h1>
+    <div id="chat-history"></div>
+    <form id="chat-form">
+        <input type="text" id="message-input" placeholder="Enter your message" autofocus autocomplete="off">
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>
