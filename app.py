@@ -10,7 +10,7 @@ from langchain.llms import OpenAI
 app = Flask(__name__)
 app.secret_key = '1234'  
 
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "your API key"
 
 loader = None
 db = None
